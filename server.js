@@ -1,7 +1,7 @@
 const express = require('express')
 const session = require('express-session')
 const passport = require('./passport')
-// const root = require('./routes/root')
+const route = require('./routes/root')
 const app = express()
 
 app.set("view engine", "hbs")
@@ -17,8 +17,9 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 app.use("/",express.static(__dirname+'/public'))
-app.use('/public', require('./routes/public'))
-app.use('/private', require('./routes/private'))
-app.use('/root', require('./routes/root'))
-
+app.use('/admin',route.admin )
+app.use('/info', route.info )
+app.use('/load', route.load )
+app.use('/login', route.login )
+app.use('/questions', route.questions )
 app.listen(9876, () => console.log("Server running on http://localhost:9876"))

@@ -35,6 +35,16 @@ const Users = db.define('user', {
         // allowNull:false,
         // unique:true
     },
+    referralKey:{
+        type:Sequelize.STRING,
+        // allowNull:false,
+        unique:true,
+    },
+    referral:{
+        type:Sequelize.INTEGER,
+        allowNull:true,
+        unique:true
+    }
 })
 
 const Progress = db.define('progress',{
@@ -56,9 +66,9 @@ const Progress = db.define('progress',{
         allowNull:false
     },
 })
-
-Progress.belongsTo(Users)
-
+Users.belongsTo(Progress)
+// Progress.belongsTo(Users)
+// Users.hasOne(Progress)
 // Question Bank
 const Question = db.define('question',{
     id:{
