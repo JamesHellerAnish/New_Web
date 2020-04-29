@@ -57,19 +57,12 @@ const Progress = db.define('progress',{
         type:Sequelize.INTEGER,
         allowNull:false
     },
-    points: {
-        type:Sequelize.INTEGER,
-        allowNull:false
-    },
     refferalCount: {
         type:Sequelize.INTEGER,
         allowNull:false
     },
 })
 Users.belongsTo(Progress)
-// Progress.belongsTo(Users)
-// Users.hasOne(Progress)
-// Question Bank
 const Question = db.define('question',{
     id:{
         type:Sequelize.INTEGER,
@@ -102,11 +95,22 @@ const Question = db.define('question',{
     },
 })
 
+const Points = db.define('points',{
+    answerPoints:{
+        type:Sequelize.INTEGER,
+        allowNull:false,
+    },
+    referralPoints:{
+        type:Sequelize.INTEGER,
+        allowNull:false,
+    }
+})
 
 db.sync().then(() => console.log("Database is ready"))
 
 exports = module.exports = {
     db,
     Users,
-    Progress
+    Progress,
+    Points
 }

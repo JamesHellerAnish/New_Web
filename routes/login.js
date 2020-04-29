@@ -11,8 +11,6 @@ route.post('/login', passport.authenticate('local', {
     successRedirect: '/load/private'
 }))
 
-
-
 route.post('/signup', (req, res) => {
     Progress.create({
         answerCount: 0,
@@ -90,18 +88,19 @@ route.post('/resendOTP',(req,res)=>{
 route.post('/refer',(req,res)=>{
     // update the count of referrals
     Users.findOne({
-        where:{
-            referralKey:req.body.referralKey
-        }
+        where:{referralKey:req.body.referralKey},
+        include:[{model:Progress}]
     })
     .then((user)=>{
-        Users.update({
-            refferalCount: user.dataValues.refferalCount+1
+        let count = user.dataValues.progress.dataValues.refferalCount + 1
+        Progress.update({
+            refferalCount : count,
         },{
             where:{
-                id:user.dataValues.id
+                id:user.dataValues.progress.dataValues.id
             }
         })
+        .catch((error)=>{res.send(error)})
 
         Users.update({
             referral:user.dataValues.id

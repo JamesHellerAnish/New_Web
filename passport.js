@@ -25,6 +25,9 @@ passport.use(new LocalStrategy(function (username, password, done) {
             username: username
         }
     }).then((user) => {
+        console.log('------------USER---------')
+        console.log(user)
+        console.log('------------USER---------')
         if (!user) {
             return done(null, false, {message: "No such user"})
         }
