@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-    <script src="/jqueryCodes/profile.js"></script>
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="/jqueryCodes/admin.js"></script>
 </head>
 <body>
+    <input type="text" id="username" placeholder="Enter username">
+    <button id="check"> Check Users</button>
     <div id="profileInfo">
         <div id="username"></div>
         <div id="firstName"></div>
@@ -17,7 +19,17 @@
         <div id="answerCount"></div>
         <div id="points"></div>
     </div>
-    <button id="check">Check Profile Info</button>
+    <div>Enter Question details to enter question</div>
+    <div>
+        <input type="text" id="text" placeholder="Question text">
+        <input type="text" id="option1" placeholder="Option 1">
+        <input type="text" id="option2" placeholder="Option 1">
+        <input type="text" id="option3" placeholder="Option 1">
+        <input type="text" id="option4" placeholder="Option 1">
+        <input type="text" id="answer" placeholder="Answer(Enter a,b,c,d)">
+        <button id="submit">Submit</button>
+    </div>
+    <div id="added">Added</div>
     <div>
         <a href="http://localhost:9876/load/admin">Admin Page</a>
         <a href="http://localhost:9876/load/profile">Profile Page</a>
@@ -26,6 +38,5 @@
         <a href="http://localhost:9876/load/refer">Referral Page</a>
         <a href="http://localhost:9876/load/signup">Signup Page</a>
     </div>
-    
 </body>
 </html>

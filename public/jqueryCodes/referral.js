@@ -1,0 +1,14 @@
+$(()=>{
+    $('#button1').click(()=>{
+        $.post('/login/refer',{
+            referralKey:$('#friendCode').val()
+        })
+        .then(()=>{
+            $('#friendCode').hide()
+            $('#button').hide()
+        })
+    })
+    $('#yourCode').click(()=>{
+        $.get('/info/referralCode',(data)=>{$('#yourCode').text(data.referralKey)})
+    })
+})

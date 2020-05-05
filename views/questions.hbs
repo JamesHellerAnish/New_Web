@@ -5,10 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="/jqueryCodes/questions.js"></script> 
 </head>
 <body>
-    <form method="GET" action="https://api.msg91.com/api/balance.php?authkey=312069A2VyUpmsqJ5e14d730P1&type=4">    
-        <input type="submit">
-    </form>
+    <button id="view">View Question</button>
+    <button id="check">Check</button>
+    <button id="next">Next Question</button>
+    <div id="div1">
+        <div id="question"></div>
+        <div id="a"></div>
+        <div id="b"></div>
+        <div id="c"></div>
+        <div id="d"></div>
+        <input id="answer" type="text" placeholder="Enter Option">
+    </div>
+
+    <div id="correct">Correct Answer</div>
+    <div id="wrong">Wrong Answer</div>
+    <div>
+        <a href="http://localhost:9876/load/admin">Admin Page</a>
+        <a href="http://localhost:9876/load/profile">Profile Page</a>
+        <a href="http://localhost:9876/load/login">Login Page</a>
+        <a href="http://localhost:9876/load/questions">Questions Page</a>
+        <a href="http://localhost:9876/load/refer">Referral Page</a>
+        <a href="http://localhost:9876/load/signup">Signup Page</a>
+    </div>
 </body>
 </html>

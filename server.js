@@ -8,13 +8,14 @@ app.set("view engine", "hbs")
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-app.use(passport.initialize())
-app.use(passport.session())
+
 app.use(session({
     secret: 'somesecretstring',
-    saveUninitialized: true,
-    resave:true
+    resave:true,
+    saveUninitialized: false
 }))
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use("/",express.static(__dirname+'/public'))
 app.use('/admin',route.admin )

@@ -1,14 +1,20 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const Users = require('./db').Users
-
+const Progress = require('./db').Progress
 passport.serializeUser(function (user, done) {
-    done(null, user.username)
+    done(null, user.id)
 })
 
-passport.deserializeUser(function (username, done) {
+passport.deserializeUser(function (id, done) {
     Users.findOne({
-        username: username
+        include:[{
+            model:Progress
+        }]
+    },{
+        where:{
+            id: id
+        }
     }).then((user) => {
         if (!user) {
             return done(new Error("No such user"))
@@ -25,16 +31,10 @@ passport.use(new LocalStrategy(function (username, password, done) {
             username: username
         }
     }).then((user) => {
-        console.log('------------USER---------')
-        console.log(user)
-        console.log('------------USER---------')
         if (!user) {
             return done(null, false, {message: "No such user"})
         }
-        if(!user.phoneNumber){
-            return done(null, false, {message: "No phoneNumber associated with the account.Account deleted"})
-        }
-        if (user.password !== password) {
+        if (user.dataValues.password !== password) {
             return done(null, false, {message: "Wrong password"})
         }
         return done(null, user)

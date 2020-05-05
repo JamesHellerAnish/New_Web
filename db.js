@@ -16,7 +16,7 @@ const Users = db.define('user', {
     username: {
         type: Sequelize.STRING,
         allowNull: false,
-
+        unique:true
     },
     password: {
         type: Sequelize.STRING,
@@ -32,18 +32,22 @@ const Users = db.define('user', {
     },
     phoneNumber:{
         type:Sequelize.STRING,
-        // allowNull:false,
-        // unique:true
+        allowNull:false,
+        unique:true
     },
     referralKey:{
         type:Sequelize.STRING,
-        // allowNull:false,
+        allowNull:false,
         unique:true,
     },
     referral:{
         type:Sequelize.INTEGER,
         allowNull:true,
         unique:true
+    },
+    lastAnswer:{
+        type:Sequelize.INTEGER,
+        allowNull:false
     }
 })
 
@@ -63,15 +67,11 @@ const Progress = db.define('progress',{
     },
 })
 Users.belongsTo(Progress)
-const Question = db.define('question',{
+const Questions= db.define('question',{
     id:{
         type:Sequelize.INTEGER,
         autoIncrement:true,
         primaryKey:true
-    },
-    catagory:{
-        type:Sequelize.STRING,
-        allowNull:false,
     },
     text:{
         type:Sequelize.STRING,
@@ -93,8 +93,22 @@ const Question = db.define('question',{
         type:Sequelize.STRING,
         allowNull:false,
     },
+    answer:{
+        type:Sequelize.STRING,
+        allowNull:false,
+    }
 })
-
+const Answered = db.define('answered',{
+    id:{
+        type:Sequelize.INTEGER,
+        autoIncrement:true,
+        primaryKey:true
+    }
+})
+// Questions.belongsToMany(Users,{through:'answered'})
+// Users.belongsToMany(Questions,{through:'answered'})
+Answered.belongsTo(Users)
+Answered.belongsTo(Questions)
 const Points = db.define('points',{
     answerPoints:{
         type:Sequelize.INTEGER,
@@ -112,5 +126,7 @@ exports = module.exports = {
     db,
     Users,
     Progress,
-    Points
+    Points,
+    Questions,
+    Answered
 }
